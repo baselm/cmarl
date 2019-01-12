@@ -1,0 +1,71 @@
+
+:9090 {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / prometheus:9090 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+
+:9093 {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / alertmanager:9093 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+
+:9094 {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / unsee:9094 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+
+:3000 {
+    proxy / grafana:3000 {
+            transparent
+            websocket
+        }
+
+    errors stderr
+    tls off
+}
+
+:80 {
+    proxy / nginx:80 {
+            transparent
+            websocket
+        }
+
+    errors stderr
+    tls off
+}
+
+:8888 {
+    proxy / nupicapi:8888 {
+            transparent
+            websocket
+        }
+
+    errors stderr
+    tls off
+}
+
+:3306 {
+    proxy / db:3306 {
+            transparent
+            websocket
+        }
+
+ 
+    errors stderr
+    tls off
+}
